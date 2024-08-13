@@ -34,8 +34,32 @@
 #        endif
 #    endif
 
+#elif defined(RGB_MATRIX_SNLED27351)
+const rgb_matrix_driver_t rgb_matrix_driver = {
+    .init          = snled27351_init_drivers,
+    .flush         = snled27351_flush,
+    .set_color     = snled27351_set_color,
+    .set_color_all = snled27351_set_color_all,
+#        if defined(RGB_MATRIX_DRIVER_SHUTDOWN_ENABLE)
+    .shutdown = snled27351_shutdown,
+    .exit_shutdown = snled27351_exit_shutdown
+#        endif
+};
+#elif defined(RGB_MATRIX_SNLED27351_SPI)
+const rgb_matrix_driver_t rgb_matrix_driver = {
+    .init = snled27351_init_drivers,
+    .flush = snled27351_flush,
+    .set_color = snled27351_set_color,
+    .set_color_all = snled27351_set_color_all,
+#        if defined(RGB_MATRIX_DRIVER_SHUTDOWN_ENABLE)
+    .shutdown = snled27351_shutdown,
+    .exit_shutdown = snled27351_exit_shutdown
+#        endif
+};
+
+#if !defined(RGB_MATRIX_SNLED27351_SPI)
 static void init(void) {
-    i2c_init();
+//    i2c_init();
 
 #    if defined(IS31FL3731)
     is31fl3731_init(DRIVER_ADDR_1);
@@ -244,6 +268,7 @@ static void init(void) {
 #        endif
 #    endif
 }
+#endif
 
 #    if defined(IS31FL3731)
 static void flush(void) {

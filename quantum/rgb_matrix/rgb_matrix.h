@@ -44,7 +44,10 @@
 #    include "aw20216.h"
 #elif defined(WS2812)
 #    include "ws2812.h"
+#elif defined(SNLED27351)
+#    include "snled27351-spi.h"
 #endif
+
 
 #ifndef RGB_MATRIX_LED_FLUSH_LIMIT
 #    define RGB_MATRIX_LED_FLUSH_LIMIT 16

@@ -1,4 +1,5 @@
 VIA_ENABLE = yes
 
-VPATH += keyboards/keychron/common
-SRC += keychron_common.c
+include keyboards/keychron/common/common.mk
+#VPATH += keyboards/keychron/common
+#SRC += keychron_common.c

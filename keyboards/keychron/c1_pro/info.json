@@ -3,8 +3,8 @@
     "manufacturer": "Keychron",
     "url": "https://github.com/Keychron",
     "maintainer": "lalalademaxiya1",
-    "processor": "STM32L432",
-    "bootloader": "stm32-dfu",
+    "processor": "AT32F405",
+    "bootloader": "at32-dfu",
     "usb": {
         "vid": "0x3434"
     },
@@ -18,9 +18,9 @@
         "nkro": true
     },
     "matrix_pins": {
-        "cols": ["C14", "C15", "A0", "A1", "A2", "A3", "A4", "A5", "A6", "A7", "B0", "B1", "A8", "A9", "A10", "H3"],
-        "rows": ["B5", "B4", "B3", "A15", "A14", "A13"]
+        "cols": ["C7", "C8", "A14", "A15", "C10", "C11", "C13", "C14", "C15", "C0", "C1", "C2", "C3", "A0", "A1", "A2", "A3"],
+        "rows": ["C12", "D2", "B3", "B4", "B5", "B6"]
     },
-    "diode_direction": "ROW2COL",
+    "diode_direction": "COL2ROW",
     "community_layouts": ["tkl_ansi"]
 }

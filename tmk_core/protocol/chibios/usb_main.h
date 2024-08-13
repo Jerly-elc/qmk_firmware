@@ -27,7 +27,7 @@
 
 /* The USB driver to use */
 #ifndef USB_DRIVER
-#    define USB_DRIVER USBD1
+#    define USB_DRIVER USBD2
 #endif // USB_DRIVER
 
 /* Initialize the USB driver and bus */

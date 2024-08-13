@@ -19,12 +19,12 @@
 // clang-format off
 
 const matrix_row_t matrix_mask[] = {
-    0b1111111111111111,
-    0b1111111111111111,
-    0b1111111111111111,
-    0b1111111111111111,
-    0b1111111111111111,
-    0b1111111111101111,
+    0b11111111111111111,
+    0b11111111111111111,
+    0b11111111111111111,
+    0b11111111111111111,
+    0b11111111111111111,
+    0b11111111111011111,
 };
 
 // clang-format on
@@ -36,9 +36,28 @@ bool dip_switch_update_kb(uint8_t index, bool active) {
         return false;
     }
     if (index == 0) {
-        default_layer_set(1UL << (active ? 2 : 0));
+        default_layer_set(1UL << (active ? 0 : 2));
     }
     return true;
 }
+
+void keyboard_post_init_kb(void) {
+    setPinOutputPushPull(LED_MAC_OS_PIN);
+    setPinOutputPushPull(LED_WIN_OS_PIN);
+	setPinOutputPushPull(LED_CAPS_LOCK_PIN);
+    writePin(LED_MAC_OS_PIN,    !LED_OS_PIN_ON_STATE);
+    writePin(LED_WIN_OS_PIN,    !LED_OS_PIN_ON_STATE);
+    writePin(LED_CAPS_LOCK_PIN, !LED_OS_PIN_ON_STATE);
+
+    keyboard_post_init_user();
+}
+
+void suspend_power_down_kb(void) {
+    writePin(LED_MAC_OS_PIN,    !LED_OS_PIN_ON_STATE);
+    writePin(LED_WIN_OS_PIN,    !LED_OS_PIN_ON_STATE);
+    writePin(LED_CAPS_LOCK_PIN, !LED_OS_PIN_ON_STATE);
+    suspend_power_down_user();
+}
+
 
 #endif // DIP_SWITCH_ENABLE

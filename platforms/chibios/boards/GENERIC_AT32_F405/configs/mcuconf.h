@@ -202,7 +202,7 @@
 /*
  * SPI driver system settings.
  */
-#define AT32_SPI_USE_SPI1                     FALSE
+#define AT32_SPI_USE_SPI1                     TRUE
 #define AT32_SPI_USE_SPI2                     FALSE
 #define AT32_SPI_USE_SPI3                     FALSE
 #define AT32_SPI_SPI1_RX_DMA_STREAM           AT32_DMA_STREAM_ID_ANY
@@ -265,8 +265,8 @@
 /*
  * USB driver system settings.
  */
-#define AT32_USB_USE_OTG1                     TRUE
-#define AT32_USB_USE_OTG2                     FALSE
+#define AT32_USB_USE_OTG1                     FALSE
+#define AT32_USB_USE_OTG2                     TRUE
 #define AT32_USE_USB_OTG2_HS                  FALSE
 #define AT32_USB_OTG1_IRQ_PRIORITY            14
 #define AT32_USB_OTG2_IRQ_PRIORITY            14

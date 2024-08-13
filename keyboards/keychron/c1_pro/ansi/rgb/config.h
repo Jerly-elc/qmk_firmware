@@ -25,8 +25,8 @@
 #define DRIVER_ADDR_2 0b1110100
 
 /* RGB Matrix Configuration */
-#define DRIVER_1_LED_TOTAL 49
-#define DRIVER_2_LED_TOTAL 39
+#define DRIVER_1_LED_TOTAL 50//49
+#define DRIVER_2_LED_TOTAL 37//39
 #define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
@@ -39,7 +39,7 @@
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 
 /* Enable caps_lock, win os and mac os indicator */
-#define CAPS_MAC_WIN_LED_INDEX 63
+#define CAPS_MAC_WIN_LED_INDEX 50
 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:
