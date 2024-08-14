@@ -1,7 +1,7 @@
 {
   "name": "Keychron C1 Pro ANSI White",
   "vendorId": "0x3434",
-  "productId": "0x0513",
+  "productId": "0x0521",
   "keycodes": ["qmk_lighting"],
   "customKeycodes": [
     {"name": "Mission Control","title": "Mission Control in macOS","shortName": "MCtrl"},

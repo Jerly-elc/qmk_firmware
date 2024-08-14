@@ -1,7 +1,7 @@
 {
   "name": "Keychron C1 Pro ANSI RGB",
   "vendorId": "0x3434",
-  "productId": "0x2220",
+  "productId": "0x0521",
   "keycodes": ["qmk_lighting"],
   "menus": [
     {
@@ -100,7 +100,7 @@
         "0,6",
         "0,7",
         "0,8",
-        "0,9",        
+        "0,9",
         {
           "x": 0.5,
           "c": "#cccccc"
@@ -108,7 +108,7 @@
         "0,10",
         "0,11",
         "0,12",
-        "0,13",    
+        "0,13",
         {
           "x": 0.25,
           "c": "#aaaaaa"
