@@ -28,6 +28,11 @@
 #define WEAR_LEVELING_LOGICAL_SIZE 2048
 #define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
 
+/* System indication led */
+#define LED_MAC_OS_PIN      C5
+#define LED_WIN_OS_PIN      C4
+#define LED_CAPS_LOCK_PIN   B10
+#define LED_OS_PIN_ON_STATE 1
 
 
 #ifdef RGB_MATRIX_ENABLE
@@ -43,11 +48,7 @@
 
 #    define SNLED23751_SPI_DIVISOR 64
 
-/* System indication led */
-#define LED_MAC_OS_PIN      C5
-#define LED_WIN_OS_PIN      C4
-#define LED_CAPS_LOCK_PIN   B10
-#define LED_OS_PIN_ON_STATE 1
+
 
 #endif
 /* Factory test keys */

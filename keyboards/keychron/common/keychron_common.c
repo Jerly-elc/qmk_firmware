@@ -19,6 +19,8 @@
 #include "keychron_common.h"
 #include "raw_hid.h"
 #include "version.h"
+#include "keycodes.h"
+#include "mousekey.h"
 
 #define PROTOCOL_VERSION 0x02
 
@@ -130,10 +132,31 @@ __attribute__((weak)) void keyboard_post_init_kb(void) {
 }
 #endif
 
+#if 0
 #ifdef PROTOCOL_CHIBIOS
 void restart_usb_driver(USBDriver *usbp) {
-    // Do nothing. Restarting the USB driver on these boards breaks it.
+    report_keyboard_t report;
+    memset(&report, 0, sizeof(report));
+    host_keyboard_send(keyboard_report);
+ #    ifdef MOUSEKEY_ENABLE
+    // Wiggle to wakeup
+    mousekey_on(KC_MS_LEFT);
+    mousekey_send();
+    wait_ms(10);
+    mousekey_on(KC_MS_RIGHT);
+    mousekey_send();
+    wait_ms(10);
+    mousekey_off((KC_MS_RIGHT));
+    mousekey_send();
+#    else
+    set_mods(0x02);
+    send_keyboard_report();
+    wait_ms(10);
+    del_mods(0x02);
+    send_keyboard_report();
+#    endif
 }
+#endif
 #endif
 
 #ifdef RAW_ENABLE

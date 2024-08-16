@@ -267,7 +267,7 @@
  */
 #define AT32_USB_USE_OTG1                     FALSE
 #define AT32_USB_USE_OTG2                     TRUE
-#define AT32_USE_USB_OTG2_HS                  FALSE
+#define AT32_USE_USB_OTG2_HS                  TRUE
 #define AT32_USB_OTG1_IRQ_PRIORITY            14
 #define AT32_USB_OTG2_IRQ_PRIORITY            14
 #define AT32_USB_OTG1_RX_FIFO_SIZE            512

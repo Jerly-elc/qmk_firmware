@@ -52,9 +52,8 @@ int main(void) {
     platform_setup();
     protocol_setup();
     keyboard_setup();
-
     protocol_init();
-
+	
     /* Main loop */
     while (true) {
         protocol_task();

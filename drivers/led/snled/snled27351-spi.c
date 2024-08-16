@@ -65,16 +65,13 @@ bool snled27351_write(uint8_t index, uint8_t page, uint8_t reg, uint8_t *data, u
 
     spi_transfer_buffer[0] = SNLED27351_WRITE | SNLED27351_PATTERN | (page & 0x0F);
     spi_transfer_buffer[1] = reg;
-    LOG_TRACE("%s,%s,%x,%x\r\n",__FILE__,__func__,spi_transfer_buffer[0],spi_transfer_buffer[0]);
     if (spi_transmit(spi_transfer_buffer, 2) != SPI_STATUS_SUCCESS) {
         spi_stop();
-		LOG_TRACE("%s,%s,%d\r\n",__FILE__,__func__,__LINE__);
         return false;
     }
 
     if (spi_transmit(data, len) != SPI_STATUS_SUCCESS) {
         spi_stop();
-		LOG_TRACE("%s,%s,%d\r\n",__FILE__,__func__,__LINE__);
         return false;
     }
 
@@ -99,7 +96,6 @@ void snled27351_init_drivers(void) {
     setPinOutput(LED_DRIVER_SHUTDOWN_PIN);
     writePinHigh(LED_DRIVER_SHUTDOWN_PIN);
 #endif
-    LOG_TRACE("%s,%s,%d\r\n",__FILE__,__func__,__LINE__);
     spi_init();
 
     for (uint8_t i = 0; i < SNLED27351_DRIVER_COUNT; i++)

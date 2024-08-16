@@ -29,6 +29,10 @@
 #define DRIVER_2_LED_TOTAL 37//39
 #define RGB_MATRIX_LED_COUNT (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
+/* Turn off backllit if brightness value is low */
+#define RGB_MATRIX_BRIGHTNESS_TURN_OFF_VAL 48
+
+
 /* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
 #define PHASE_CHANNEL MSKPHASE_9CHANNEL
 /* Set led driver current */

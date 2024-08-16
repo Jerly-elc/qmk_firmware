@@ -16,6 +16,8 @@
 
 #include "quantum.h"
 
+#define IO_DELAY_US    20
+
 // clang-format off
 
 const matrix_row_t matrix_mask[] = {
@@ -26,6 +28,33 @@ const matrix_row_t matrix_mask[] = {
     0b11111111111111111,
     0b11111111111011111,
 };
+
+/**
+ * wait for all Row signals to go HIGH
+ */
+void matrix_io_delay(void) {
+   uint16_t delayCnt = 0;
+   for(delayCnt = 0; delayCnt < IO_DELAY_US; delayCnt++)
+   {
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");       
+   }
+}
+
 
 // clang-format on
 
