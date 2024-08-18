@@ -55,6 +55,17 @@ void matrix_io_delay(void) {
    }
 }
 
+void eeconfig_init_kb(void) {
+#if (EECONFIG_KB_DATA_SIZE) == 0
+    // Reset Keyboard EEPROM value to blank, rather than to a set value
+    eeconfig_update_kb(0);
+#endif
+    keymap_config.raw  = eeconfig_read_keymap();
+    keymap_config.nkro = 0;
+    eeconfig_update_keymap(keymap_config.raw);
+
+    eeconfig_init_user();
+}
 
 // clang-format on
 

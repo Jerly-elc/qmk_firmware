@@ -45,7 +45,7 @@ key_combination_t key_comb_list[4] = {
     {2, {KC_LWIN, KC_C}},
 };
 
-static uint8_t mac_keycode[4] = {KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD};
+static uint8_t mac_keycode[6] = {KC_LOPT, KC_ROPT, KC_LCMD, KC_RCMD};
 
 void housekeeping_task_keychron(void) {
     if (is_siri_active) {
@@ -58,7 +58,6 @@ void housekeeping_task_keychron(void) {
 }
 
 bool process_record_keychron(uint16_t keycode, keyrecord_t *record) {
-   LOG_TRACE("%s,%d\n\r",__func__,__LINE__);
     switch (keycode) {
         case QK_KB_0:
             if (record->event.pressed) {
@@ -135,28 +134,10 @@ __attribute__((weak)) void keyboard_post_init_kb(void) {
 #if 0
 #ifdef PROTOCOL_CHIBIOS
 void restart_usb_driver(USBDriver *usbp) {
-    report_keyboard_t report;
-    memset(&report, 0, sizeof(report));
-    host_keyboard_send(keyboard_report);
- #    ifdef MOUSEKEY_ENABLE
-    // Wiggle to wakeup
-    mousekey_on(KC_MS_LEFT);
-    mousekey_send();
-    wait_ms(10);
-    mousekey_on(KC_MS_RIGHT);
-    mousekey_send();
-    wait_ms(10);
-    mousekey_off((KC_MS_RIGHT));
-    mousekey_send();
-#    else
-    set_mods(0x02);
-    send_keyboard_report();
-    wait_ms(10);
-    del_mods(0x02);
-    send_keyboard_report();
-#    endif
+    // Do nothing. Restarting the USB driver on these boards breaks it.
 }
 #endif
+
 #endif
 
 #ifdef RAW_ENABLE

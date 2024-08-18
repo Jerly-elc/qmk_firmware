@@ -151,31 +151,6 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
-#if 0
-bool rgb_matrix_indicators_advanced_kb(uint8_t led_min, uint8_t led_max) {
-    if (!rgb_matrix_indicators_advanced_user(led_min, led_max)) {
-        return false;
-    }
-    if ((host_keyboard_led_state().caps_lock) && (default_layer_state == (1 << 0))) 
-    {
-        rgb_matrix_set_color(CAPS_MAC_WIN_LED_INDEX, 0, 0, 255);
-    } 
-	else if ((!host_keyboard_led_state().caps_lock) && (default_layer_state == (1 << 0))) 
-	{   
-	    return false;
-    } 
-	else if ((host_keyboard_led_state().caps_lock) && (default_layer_state == (1 << 2))) 
-	{
-        rgb_matrix_set_color(CAPS_MAC_WIN_LED_INDEX, 0, 0, 255);
-    } 
-	else if ((!host_keyboard_led_state().caps_lock) && (default_layer_state == (1 << 2))) 
-	{
-	    return false;
-    }
-    return true;
-}
-#endif
-
 void housekeeping_task_kb(void) {
     if (default_layer_state == (1 << 0)) {
         writePin(LED_MAC_OS_PIN, LED_OS_PIN_ON_STATE);
