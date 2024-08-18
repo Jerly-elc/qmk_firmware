@@ -139,6 +139,7 @@ __attribute__((weak)) bool process_record_keychron_ft(uint16_t keycode, keyrecor
 }
 
 static void factory_reset(void) {
+    clear_keyboard();
     timer_300ms_buffer = timer_read32();
     factory_reset_count++;
 #ifdef KEYBOARD_keychron_c3_pro_ansi_white
@@ -241,36 +242,29 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                 if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
                     rgb_matrix_sethsv_noeeprom(HSV_WHITE);
                 } else {
-                    for (uint8_t i = led_min; i <= led_max; i++) {
-                        rgb_matrix_set_color(i, RGB_WHITE);
-                    }
+					rgb_matrix_set_color_all(RGB_WHITE);
                 }
+				
                 break;
             case LED_TEST_MODE_RED:
                 if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
                     rgb_matrix_sethsv_noeeprom(HSV_RED);
                 } else {
-                    for (uint8_t i = led_min; i <= led_max; i++) {
-                        rgb_matrix_set_color(i, RGB_RED);
-                    }
+                    rgb_matrix_set_color_all(RGB_RED);
                 }
                 break;
             case LED_TEST_MODE_GREEN:
                 if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
                     rgb_matrix_sethsv_noeeprom(HSV_GREEN);
                 } else {
-                    for (uint8_t i = led_min; i <= led_max; i++) {
-                        rgb_matrix_set_color(i, RGB_GREEN);
-                    }
+                    rgb_matrix_set_color_all(RGB_GREEN);
                 }
                 break;
             case LED_TEST_MODE_BLUE:
                 if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
                     rgb_matrix_sethsv_noeeprom(HSV_BLUE);
                 } else {
-                    for (uint8_t i = led_min; i <= led_max; i++) {
-                        rgb_matrix_set_color(i, RGB_BLUE);
-                    }
+                    rgb_matrix_set_color_all(RGB_BLUE);
                 }
                 break;
             default:
