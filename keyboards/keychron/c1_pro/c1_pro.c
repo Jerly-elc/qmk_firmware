@@ -15,6 +15,9 @@
  */
 
 #include "quantum.h"
+#include "keychron_common.h"
+#include "keychron_ft_common.h"
+
 
 #define IO_DELAY_US    20
 
@@ -28,6 +31,17 @@ const matrix_row_t matrix_mask[] = {
     0b11111111111111111,
     0b11111111111011111,
 };
+
+/**
+  watchdog parameter configuration
+*/
+static const WDGConfig wdgcfg = {
+  .pr           = 3,
+  .rlr          = 200,
+
+};
+
+
 
 /**
  * wait for all Row signals to go HIGH
@@ -90,6 +104,8 @@ void keyboard_post_init_kb(void) {
     writePin(LED_CAPS_LOCK_PIN, !LED_OS_PIN_ON_STATE);
 
     keyboard_post_init_user();
+
+	wdgStart(&WDGD1, &wdgcfg);
 }
 
 void suspend_power_down_kb(void) {
@@ -98,6 +114,25 @@ void suspend_power_down_kb(void) {
     writePin(LED_CAPS_LOCK_PIN, !LED_OS_PIN_ON_STATE);
     suspend_power_down_user();
 }
+
+// clang-format on
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (!process_record_keychron(keycode, record)) {
+        return false;
+    }
+    if (!process_record_keychron_ft(keycode, record)) {
+        return false;
+    }
+    return true;
+}
+
+void housekeeping_task_user(void) {
+    housekeeping_task_keychron();
+    housekeeping_task_keychron_ft();
+	wdgReset(&WDGD1);
+}
+
 
 
 #endif // DIP_SWITCH_ENABLE

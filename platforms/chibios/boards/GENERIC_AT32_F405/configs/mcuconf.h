@@ -276,6 +276,6 @@
 /*
  * WDG driver system settings.
  */
-#define AT32_WDG_USE_IWDG                     FALSE
+#define AT32_WDG_USE_IWDG                     TRUE
 
 #endif /* MCUCONF_H */

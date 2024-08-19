@@ -53,7 +53,6 @@ int main(void) {
     protocol_setup();
     keyboard_setup();
     protocol_init();
-	
     /* Main loop */
     while (true) {
         protocol_task();
