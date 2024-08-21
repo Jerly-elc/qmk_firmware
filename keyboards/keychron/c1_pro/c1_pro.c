@@ -16,7 +16,7 @@
 
 #include "quantum.h"
 
-#define IO_DELAY_US    20
+#define IO_DELAY_US    65
 
 // clang-format off
 
