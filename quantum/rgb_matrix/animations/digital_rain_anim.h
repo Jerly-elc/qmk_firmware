@@ -17,7 +17,10 @@ bool DIGITAL_RAIN(effect_params_t* params) {
 
     static uint8_t drop  = 0;
     static uint8_t decay = 0;
-
+    if(params->flags == 0)
+    {
+        return false;
+    }
     if (params->init) {
         rgb_matrix_set_color_all(0, 0, 0);
         memset(g_rgb_frame_buffer, 0, sizeof(g_rgb_frame_buffer));
