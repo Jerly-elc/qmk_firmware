@@ -1,5 +1,5 @@
 {
-  "name": "Keychron C1 Pro ANSI RGB",
+  "name": "Keychron C1 Pro Version3 ANSI",
   "vendorId": "0x3434",
   "productId": "0x0521",
   "keycodes": ["qmk_lighting"],

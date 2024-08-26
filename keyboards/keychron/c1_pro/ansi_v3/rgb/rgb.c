@@ -124,7 +124,7 @@ const snled27351_led_t PROGMEM g_snled27351_leds[RGB_MATRIX_LED_COUNT] = {
 
 
 // clang-format on
-
+#if 0
 bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
     if (!process_record_user(keycode, record)) {
         return false;
@@ -150,7 +150,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
     }
     return true;
 }
-
+#endif
 void housekeeping_task_kb(void) {
     if (default_layer_state == (1 << 0)) {
         writePin(LED_MAC_OS_PIN, LED_OS_PIN_ON_STATE);
