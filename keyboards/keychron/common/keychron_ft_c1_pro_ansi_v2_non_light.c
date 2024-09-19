@@ -133,13 +133,18 @@ void factory_reset_ind_task(void) {
             if (host_keyboard_led_state().caps_lock) {
                 writePin(LED_CAPS_LOCK_PIN, LED_OS_PIN_ON_STATE);
             }
+			if (host_keyboard_led_state().num_lock) {
+                writePin(LED_NUM_LOCK_PIN, LED_OS_PIN_ON_STATE);
+            }
         } else {
             timer_300ms_buffer = timer_read32();
             if (factory_reset_count % 2 == 0) {
+				writePin(LED_NUM_LOCK_PIN, LED_OS_PIN_ON_STATE);
                 writePin(LED_MAC_OS_PIN, LED_OS_PIN_ON_STATE);
                 writePin(LED_WIN_OS_PIN, LED_OS_PIN_ON_STATE);
                 writePin(LED_CAPS_LOCK_PIN, LED_OS_PIN_ON_STATE);
             } else {
+				writePin(LED_NUM_LOCK_PIN, !LED_OS_PIN_ON_STATE);
                 writePin(LED_MAC_OS_PIN, !LED_OS_PIN_ON_STATE);
                 writePin(LED_WIN_OS_PIN, !LED_OS_PIN_ON_STATE);
                 writePin(LED_CAPS_LOCK_PIN, !LED_OS_PIN_ON_STATE);

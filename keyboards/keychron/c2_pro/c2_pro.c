@@ -16,15 +16,56 @@
 
 #include "quantum.h"
 
+#define IO_DELAY_US    65
+
 // clang-format off
+
 const matrix_row_t matrix_mask[] = {
-    0b11111111111111111111,
-    0b11111111111111111111,
-    0b11111111111111111111,
-    0b11111111111111111111,
-    0b11111111111111111111,
-    0b11111111111111101111,
+    0b11111111111111111,
+    0b11111111111111111,
+    0b11111111111111111,
+    0b11111111111111111,
+    0b11111111111111111,
+    0b11111111111011111,
 };
+
+/**
+ * wait for all Row signals to go HIGH
+ */
+void matrix_io_delay(void) {
+   uint16_t delayCnt = 0;
+   for(delayCnt = 0; delayCnt < IO_DELAY_US; delayCnt++)
+   {
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");
+       asm volatile("nop" ::: "memory");       
+   }
+}
+
+void eeconfig_init_kb(void) {
+#if (EECONFIG_KB_DATA_SIZE) == 0
+    // Reset Keyboard EEPROM value to blank, rather than to a set value
+    eeconfig_update_kb(0);
+#endif
+    keymap_config.raw  = eeconfig_read_keymap();
+    keymap_config.nkro = 0;
+    eeconfig_update_keymap(keymap_config.raw);
+
+    eeconfig_init_user();
+}
 
 // clang-format on
 
@@ -35,95 +76,31 @@ bool dip_switch_update_kb(uint8_t index, bool active) {
         return false;
     }
     if (index == 0) {
-        default_layer_set(1UL << (active ? 2 : 0));
+        default_layer_set(1UL << (active ? 0 : 2));
     }
     return true;
 }
+
+void keyboard_post_init_kb(void) {
+	setPinOutputPushPull(LED_NUM_LOCK_PIN);
+    setPinOutputPushPull(LED_MAC_OS_PIN);
+    setPinOutputPushPull(LED_WIN_OS_PIN);
+	setPinOutputPushPull(LED_CAPS_LOCK_PIN);
+    writePin(LED_NUM_LOCK_PIN,  !LED_OS_PIN_ON_STATE);	
+    writePin(LED_MAC_OS_PIN,    !LED_OS_PIN_ON_STATE);
+    writePin(LED_WIN_OS_PIN,    !LED_OS_PIN_ON_STATE);
+    writePin(LED_CAPS_LOCK_PIN, !LED_OS_PIN_ON_STATE);
+
+    keyboard_post_init_user();
+}
+
+void suspend_power_down_kb(void) {
+    writePin(LED_NUM_LOCK_PIN,  !LED_OS_PIN_ON_STATE);
+    writePin(LED_MAC_OS_PIN,    !LED_OS_PIN_ON_STATE);
+    writePin(LED_WIN_OS_PIN,    !LED_OS_PIN_ON_STATE);
+    writePin(LED_CAPS_LOCK_PIN, !LED_OS_PIN_ON_STATE);
+    suspend_power_down_user();
+}
+
 
 #endif // DIP_SWITCH_ENABLE
-
-#    ifdef RGB_MATRIX_ENABLE
-#        define LED_SET_FLAGS rgb_matrix_set_flags
-#        define LED_GET_FLAGS rgb_matrix_get_flags
-#        define LED_SET_ALL_OFF rgb_matrix_set_color_all(COLOR_BLACK)
-#        define LED_IS_ENABLED rgb_matrix_is_enabled
-#        define LED_ENABLE rgb_matrix_enable
-#        define LED_MATRIX_INDICATORS_KB rgb_matrix_indicators_kb
-#        define LED_MATRIX_INDICATORS_USER rgb_matrix_indicators_user
-#        define LED_MATRIX_SET_COLOR rgb_matrix_set_color
-#        define LED_MATRIX_UPDATE_PWN_BUFFERS rgb_matrix_update_pwm_buffers
-#        define LED_MATRIX_INDICATORS_NONE_KB rgb_matrix_indicators_none_kb
-#        define LED_MATRIX_IS_ENABLED rgb_matrix_is_enabled
-#        define COLOR_WHITE 255, 255, 255
-#        define COLOR_BLACK 0, 0, 0
-#    endif
-
-#    ifdef LED_MATRIX_ENABLE
-#        define LED_SET_FLAGS led_matrix_set_flags
-#        define LED_GET_FLAGS led_matrix_get_flags
-#        define LED_SET_ALL_OFF led_matrix_set_value_all(COLOR_BLACK)
-#        define LED_IS_ENABLED led_matrix_is_enabled
-#        define LED_ENABLE led_matrix_enable
-#        define LED_MATRIX_INDICATORS_KB led_matrix_indicators_kb
-#        define LED_MATRIX_INDICATORS_USER led_matrix_indicators_user
-#        define LED_MATRIX_SET_COLOR led_matrix_set_value
-#        define LED_MATRIX_UPDATE_PWN_BUFFERS led_matrix_update_pwm_buffers
-#        define LED_MATRIX_INDICATORS_NONE_KB led_matrix_indicators_none_kb
-#        define LED_MATRIX_IS_ENABLED led_matrix_is_enabled
-#        define COLOR_WHITE 255
-#        define COLOR_BLACK 0
-
-bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
-    if (!process_record_user(keycode, record)) {
-        return false;
-    }
-    switch (keycode) {
-        case RGB_TOG:
-            if (record->event.pressed) {
-                switch (LED_GET_FLAGS()) {
-                    case LED_FLAG_ALL: {
-                        LED_SET_FLAGS(LED_FLAG_NONE);
-                        LED_SET_ALL_OFF;
-                    } break;
-                    default: {
-                        LED_SET_FLAGS(LED_FLAG_ALL);
-                    } break;
-                }
-            }
-            if (!LED_IS_ENABLED()) {
-                LED_SET_FLAGS(LED_FLAG_ALL);
-                LED_ENABLE();
-            }
-            return false;
-    }
-    return true;
-}
-
-bool LED_MATRIX_INDICATORS_KB(void) {
-    if (!LED_MATRIX_INDICATORS_USER()) {
-        return false;
-    }
-    if (host_keyboard_led_state().caps_lock) {
-        LED_MATRIX_SET_COLOR(CAPS_LED_INDEX, COLOR_WHITE);
-    } else {
-        LED_MATRIX_SET_COLOR(CAPS_LED_INDEX, COLOR_BLACK);
-    }
-    if (host_keyboard_led_state().num_lock) {
-        LED_MATRIX_SET_COLOR(NUM_LED_INDEX, COLOR_WHITE);
-    } else {
-        LED_MATRIX_SET_COLOR(NUM_LED_INDEX, COLOR_BLACK);
-    }
-    if (default_layer_state == (1 << 0)) {
-        LED_MATRIX_SET_COLOR(MAC_LED_INDEX, COLOR_WHITE);
-    } else {
-        LED_MATRIX_SET_COLOR(MAC_LED_INDEX, COLOR_BLACK);
-    }
-    if (default_layer_state == (1 << 2)) {
-        LED_MATRIX_SET_COLOR(WIN_LED_INDEX, COLOR_WHITE);
-    } else {
-        LED_MATRIX_SET_COLOR(WIN_LED_INDEX, COLOR_BLACK);
-    }
-    return true;
-}
-
-#endif
