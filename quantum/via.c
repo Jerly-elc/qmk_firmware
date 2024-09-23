@@ -282,6 +282,7 @@ void raw_hid_receive(uint8_t *data, uint8_t length) {
 
     // If via_command_kb() returns true, the command was fully
     // handled, including calling raw_hid_send()
+//    LOG_TRACE("%s,%d\n\r",__func__,__LINE__);
     if (via_command_kb(data, length)) {
         return;
     }
@@ -384,6 +385,7 @@ void raw_hid_receive(uint8_t *data, uint8_t length) {
         case id_custom_set_value:
         case id_custom_get_value:
         case id_custom_save: {
+//			LOG_TRACE("%s,%d\n\r",__func__,__LINE__);
             via_custom_value_command(data, length);
             break;
         }
