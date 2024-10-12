@@ -1,0 +1,26 @@
+{
+    "keyboard_name": "Keychron C2 Pro Version 3",
+    "manufacturer": "Keychron",
+    "url": "https://github.com/Keychron",
+    "maintainer": "lalalademaxiya1",
+    "processor": "AT32F405",
+    "bootloader": "at32-dfu",
+    "usb": {
+        "vid": "0x3434"
+    },
+    "features": {
+        "bootmagic": true,
+        "command": false,
+        "console": false,
+        "dip_switch": true,
+        "extrakey": true,
+        "mousekey": true,
+        "nkro": true
+    },
+    "matrix_pins": {
+        "cols": ["C14", "C15", "C2", "C3", "A0", "A1", "A2", "A3", "B10", "A11", "A13", "C7", "C8", "C9", "A10", "A13", "A14", "B7"],
+        "rows": ["C12", "D2", "B3", "B4", "B5", "B6"]
+    },
+    "diode_direction": "COL2ROW",
+    "community_layouts": ["tkl_ansi"]
+}

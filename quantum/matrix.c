@@ -284,7 +284,7 @@ void matrix_init(void) {
 #    endif
 #    ifdef MATRIX_ROW_PINS_RIGHT
         const pin_t row_pins_right[ROWS_PER_HAND] = MATRIX_ROW_PINS_RIGHT;
-        for (uint8_t i = 0; i < ROWS_PER_HAND; i++) {
+         for (uint8_t i = 0; i < ROWS_PER_HAND; i++) {
             row_pins[i] = row_pins_right[i];
         }
 #    endif

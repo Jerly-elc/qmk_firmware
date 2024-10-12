@@ -113,7 +113,7 @@ bool process_record_keychron(uint16_t keycode, keyrecord_t *record) {
             return true; // Process all other keycodes normally
     }
 }
-
+#if 0
 #if defined(ENCODER_ENABLE) && defined(PAL_USE_CALLBACKS)
 static void encoder_pad_cb(void *param) {
     encoder_interrupt_read((uint32_t)param & 0XFF);
@@ -129,6 +129,7 @@ __attribute__((weak)) void keyboard_post_init_kb(void) {
         palSetLineCallback(encoders_pad_b[i], encoder_pad_cb, (void *)i);
     }
 }
+#endif
 #endif
 
 #if 0
