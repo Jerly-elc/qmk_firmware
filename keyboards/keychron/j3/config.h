@@ -16,6 +16,10 @@
 
 #pragma once
 
+#define EECONFIG_KB_DATA_SIZE 1
+#define EECONFIG_USER_DATA_SIZE 1
+
+
 /* DIP switch */
 //#define DIP_SWITCH_MATRIX_GRID { { 5, 4 } }
 #define DIP_SWITCH_PINS { B1 }
@@ -29,18 +33,22 @@
 #define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
 
 /* System indication led */
-#define LED_NUM_LOCK_PIN    C5
-//#define LED_MAC_OS_PIN      C5
-#define LED_WIN_OS_PIN      C1
-#define LED_CAPS_LOCK_PIN   C0
-#define LED_OS_PIN_ON_STATE 1
+#define LED_NUM_LOCK_PIN            C5
+#define WIN_LOCK_LED_PIN            C1
+
+#define LED_CAPS_LOCK_PIN           C0
+#define LED_OS_PIN_ON_STATE         1
+#define LED_PIN_ON_STATE            1
+#define LED_WINLOCK_PIN_ON_STATE    1
+#define WIN_LOCK_INDEX              88
+
 
 
 #ifdef RGB_MATRIX_ENABLE
 
 #    define RGB_MATRIX_SNLED27351_SPI
 
-#    define SPI_SCK_PIN A5
+#    define SPI_SCK_PIN  A5
 #    define SPI_MISO_PIN A6
 #    define SPI_MOSI_PIN A7
 

@@ -112,6 +112,7 @@ __attribute__((weak)) void led_update_ports(led_t led_state) {
 #ifdef LED_KANA_PIN
     writePin(LED_KANA_PIN, led_state.kana);
 #endif
+
 }
 
 /** \brief Initialise any LED related hardware and/or state
@@ -137,6 +138,7 @@ __attribute__((weak)) void led_init_ports(void) {
     setPinOutput(LED_KANA_PIN);
     writePin(LED_KANA_PIN, !LED_PIN_ON_STATE);
 #endif
+
 }
 
 /** \brief Entrypoint for protocol to LED binding

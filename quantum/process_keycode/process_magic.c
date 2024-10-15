@@ -45,6 +45,7 @@ float cg_swap_song[][2] = CG_SWAP_SONG;
 bool process_magic(uint16_t keycode, keyrecord_t *record) {
     // skip anything that isn't a keyup
     if (record->event.pressed) {
+		LOG_TRACE("%s,%d,k=%d \n\r",__func__,__LINE__,keycode);
         if (IS_MAGIC_KEYCODE(keycode)) {
             /* keymap config */
             keymap_config.raw = eeconfig_read_keymap();
@@ -146,7 +147,7 @@ bool process_magic(uint16_t keycode, keyrecord_t *record) {
                     keymap_config.swap_ralt_rgui = keymap_config.swap_lalt_lgui;
 #ifdef AUDIO_ENABLE
                     if (keymap_config.swap_ralt_rgui) {
-                        PLAY_SONG(ag_swap_song);
+                        PLAY_SONG(ag_swap_song);77-
                     } else {
                         PLAY_SONG(ag_norm_song);
                     }

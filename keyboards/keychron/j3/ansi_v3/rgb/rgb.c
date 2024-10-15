@@ -16,6 +16,7 @@
 
 #include "quantum.h"
 
+
 // clang-format off
 #ifdef RGB_MATRIX_ENABLE  
 const snled27351_led_t PROGMEM g_snled27351_leds[RGB_MATRIX_LED_COUNT] = {  
@@ -133,45 +134,7 @@ const snled27351_led_t PROGMEM g_snled27351_leds[RGB_MATRIX_LED_COUNT] = {
 };  
 
 
-
-// clang-format on
-#if 0
-bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
-    if (!process_record_user(keycode, record)) {
-        return false;
-    }
-    switch (keycode) {
-        case RGB_TOG:
-            if (record->event.pressed) {
-                switch (rgb_matrix_get_flags()) {
-                    case LED_FLAG_ALL: {
-                        rgb_matrix_set_flags(LED_FLAG_NONE);
-                        rgb_matrix_set_color_all(0, 0, 0);
-                    } break;
-                    default: {
-                        rgb_matrix_set_flags(LED_FLAG_ALL);
-                    } break;
-                }
-            }
-            if (!rgb_matrix_is_enabled()) {
-                rgb_matrix_set_flags(LED_FLAG_ALL);
-                rgb_matrix_enable();
-            }
-            return false;
-    }
-    return true;
-}
 #endif
-void housekeeping_task_kb(void) {
-    if (default_layer_state == (1 << 0)) {
-//        writePin(LED_MAC_OS_PIN, LED_OS_PIN_ON_STATE);
-        writePin(LED_WIN_OS_PIN, !LED_OS_PIN_ON_STATE);
-    }
-    if (default_layer_state == (1 << 2)) {
-//        writePin(LED_MAC_OS_PIN, !LED_OS_PIN_ON_STATE);
-        writePin(LED_WIN_OS_PIN, LED_OS_PIN_ON_STATE);
-    }
-}
 
 
-#endif
+

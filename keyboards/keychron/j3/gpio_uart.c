@@ -7,7 +7,7 @@
 #ifdef UART_DEBUG_TRACE
 
 #ifndef DEBUG_PORT
-#define DEBUG_PORT  GPIOA
+#define DEBUG_PORT  GPIOB
 #endif
 
 #ifndef DEBUG_PIN
