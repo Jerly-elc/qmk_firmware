@@ -4,9 +4,9 @@
 #include "stdarg.h"
 
 
-#define UART_DEBUG_TRACE
+//#define IO_UART_DEBUG_TRACE
 
-#ifdef UART_DEBUG_TRACE
+#ifdef IO_UART_DEBUG_TRACE
 void gpiouart_init(void);
 void log_uint8(unsigned char val);
 void log_uint8_arrary(unsigned char *val ,unsigned char len);

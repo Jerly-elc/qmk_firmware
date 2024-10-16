@@ -4,7 +4,8 @@
 #include "at32_gpio.h"
 #include "string.h"
 
-#ifdef UART_DEBUG_TRACE
+
+#ifdef IO_UART_DEBUG_TRACE
 
 #ifndef DEBUG_PORT
 #define DEBUG_PORT  GPIOB
