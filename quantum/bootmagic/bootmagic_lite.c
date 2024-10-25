@@ -36,7 +36,7 @@ __attribute__((weak)) void bootmagic_lite(void) {
     // We need multiple scans because debouncing can't be turned off.
     matrix_scan();
 #if defined(DEBOUNCE) && DEBOUNCE > 0
-    wait_ms(DEBOUNCE * 2);
+    wait_ms(DEBOUNCE * 4);
 #else
     wait_ms(30);
 #endif
