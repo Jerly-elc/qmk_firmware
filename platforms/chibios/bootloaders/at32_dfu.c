@@ -20,12 +20,13 @@
 #include <hal.h>
 #include "wait.h"
 
+extern uint32_t  __ram0_end__;
+
 #define BOOTLOADER_MAGIC 0x5AA5
-#if defined(AT32F415xx) || defined(AT32F402_5xx) || defined(AT32F435_7xx) || defined(AT32F423xx)
-#define MAGIC_ADDR (__IO uint32_t *)(ERTC_BASE + 0x50)
-#elif defined(AT32F413xx) || defined(AT32F403_7xx)
-#define MAGIC_ADDR (__IO uint32_t *)(BPR_BASE + 0x04)
-#endif
+
+#define SYMVAL(sym) (uint32_t)(((uint8_t *)&(sym)) - ((uint8_t *)0))
+#define AT32_BOOTLOADER_RAM_SYMBOL __ram0_end__
+#define MAGIC_ADDR (unsigned long *)(SYMVAL(AT32_BOOTLOADER_RAM_SYMBOL) - 4)
 
 __attribute__((weak)) void bootloader_jump(void) {
     *MAGIC_ADDR = (uint32_t)BOOTLOADER_MAGIC;
@@ -49,4 +50,5 @@ void enter_bootloader_mode_if_requested(void) {
         while (1);
     }
 }
+
 
