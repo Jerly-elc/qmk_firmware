@@ -239,33 +239,16 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     } else if (led_test_mode) {
         switch (led_test_mode) {
             case LED_TEST_MODE_WHITE:
-                if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
-                    rgb_matrix_sethsv_noeeprom(HSV_WHITE);
-                } else {
-					rgb_matrix_set_color_all(RGB_WHITE);
-                }
-				
+				rgb_matrix_set_color_all(RGB_WHITE);
                 break;
             case LED_TEST_MODE_RED:
-                if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
-                    rgb_matrix_sethsv_noeeprom(HSV_RED);
-                } else {
-                    rgb_matrix_set_color_all(RGB_RED);
-                }
+                rgb_matrix_set_color_all(RGB_RED);
                 break;
             case LED_TEST_MODE_GREEN:
-                if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
-                    rgb_matrix_sethsv_noeeprom(HSV_GREEN);
-                } else {
-                    rgb_matrix_set_color_all(RGB_GREEN);
-                }
+                rgb_matrix_set_color_all(RGB_GREEN);
                 break;
             case LED_TEST_MODE_BLUE:
-                if (rgb_matrix_get_mode() == RGB_MATRIX_SOLID_COLOR) {
-                    rgb_matrix_sethsv_noeeprom(HSV_BLUE);
-                } else {
-                    rgb_matrix_set_color_all(RGB_BLUE);
-                }
+                rgb_matrix_set_color_all(RGB_BLUE);
                 break;
             default:
                 break;
