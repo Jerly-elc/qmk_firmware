@@ -75,6 +75,8 @@ void eeconfig_init_kb(void) {
     keymap_config.raw  = eeconfig_read_keymap();
     keymap_config.nkro = 0;
     eeconfig_update_keymap(keymap_config.raw);
+	default_layer_set(1U << 0);
+    eeconfig_update_default_layer(default_layer_state);
 
     eeconfig_init_user();
 }
@@ -125,7 +127,8 @@ void keyboard_post_init_kb(void) {
     writePin(LED_NUM_LOCK_PIN,  !LED_OS_PIN_ON_STATE);	
     writePin(LED_CAPS_LOCK_PIN, !LED_OS_PIN_ON_STATE);
 	writePin(WIN_LOCK_LED_PIN,  !LED_WINLOCK_PIN_ON_STATE);
-    
+	
+    default_layer_set(1U << 0);
     keyboard_post_init_user();
 	suspend_power_down_user();
 }
